@@ -48,6 +48,9 @@ div.css-j5r0tf.e1tzin5v2 {
     padding: 5px;
     font-family: serif;
     min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .css-1v0mbdj.etr89bj1 {
@@ -61,6 +64,10 @@ div.css-j5r0tf.e1tzin5v2 {
     -webkit-transform: scale(1.5);
 	transform: scale(1.5);
     z-index: 1000;
+}
+
+.css-177yq5e {
+    margin-bottom: 0rem;
 }
 
 .css-6awftf.e19lei0e0 {
