@@ -3,6 +3,8 @@ from script.recommender import fetch_poster, movie_link
 
 
 def create_recommender_system(cfg, movie_num=5):
+    """here we create empty blanks for all recommended movies
+    and add description and title from appropriate config file"""
     with st.expander(cfg["title"]):
         st.markdown(cfg["description"])
     movie_cols = st.columns(movie_num)
@@ -14,6 +16,7 @@ def create_recommender_system(cfg, movie_num=5):
 
 
 def show_recommended_movie_info(recommended_movies, movie_cols):
+    """in this function we get all data what we want to show and put in on webpage"""
     movie_ids = recommended_movies["movieId"]
     movie_titles = recommended_movies["title"]
     movie_scores = recommended_movies["score"]
