@@ -10,7 +10,7 @@ st.set_page_config(page_title="Recommender system")
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-movie = pd.read_pickle("data/movie_df.pkl")
+movie = pd.read_pickle("data/movies.pkl")
 
 # add search panel and button widget
 st.markdown('# Movie Recommender system')
