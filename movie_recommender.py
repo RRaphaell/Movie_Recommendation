@@ -1,4 +1,5 @@
 import pandas as pd
+import pickle
 import streamlit as st
 from script.recommender import contend_based_recommendations, best_score_based_recommendations, contend_based_recommendations_extra
 from config import score_based_cfg, content_based_cfg, content_extra_based_cfg
@@ -10,7 +11,8 @@ st.set_page_config(page_title="Recommender system")
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-movie = pd.read_pickle("data/movies.pkl")
+with open('data/movie_df.pickle', 'rb') as handle:
+    movie = pickle.load(handle)
 
 # add search panel and button widget
 st.markdown('# Movie Recommender system')
@@ -28,8 +30,8 @@ if show_recommended_movies_btn:
     score_based_recommended_movies = best_score_based_recommendations()
     show_recommended_movie_info(score_based_recommended_movies, col_for_score_based)
 
-    contend_based_recommended_movies = contend_based_recommendations(movie, options[0])
+    contend_based_recommended_movies = contend_based_recommendations(movie, options)
     show_recommended_movie_info(contend_based_recommended_movies, col_for_content_based)
 
-    contend_extra_based_recommended_movies = contend_based_recommendations_extra(movie, options[0])
+    contend_extra_based_recommended_movies = contend_based_recommendations_extra(movie, options)
     show_recommended_movie_info(contend_extra_based_recommended_movies, col_for_content_based_extra)

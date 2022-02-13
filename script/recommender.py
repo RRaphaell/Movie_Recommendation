@@ -1,5 +1,7 @@
 import scipy
+import pickle
 import requests
+import functools
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
 
@@ -22,37 +24,39 @@ def fetch_poster(movie_id):
 def best_score_based_recommendations(num_movies=5):
     """we have already saved dataframe which is sorted based on scores.
     and just read and get top movies"""
-    movies = pd.read_pickle("data/movie_scores.pkl")
+    with open('data/movie_scores.pickle', 'rb') as handle:
+        movies = pickle.load(handle)
     movies = movies.head(num_movies)
-    return pd.DataFrame(zip(movies['id'], movies['title'], movies["score"]),
-                        columns=["movieId", "title", "score"])
+    movies = movies[["id", "title", "score"]]
+    movies.columns = ["movieId", "title", "score"]
+    return movies
 
 
-def get_recommendations(movie, title, cosine_sim, num_movies=10):
+def get_recommendations(movie, titles, cosine_sim, num_movies=10):
     """in this function we find similarity score for specific movie sorted
     and gets all metadata for it"""
 
     indices = pd.Series(movie.index, index=movie['title']).drop_duplicates()
-    idx = indices[title]
-    sim_scores = list(enumerate(cosine_sim[idx]))
+    idx = [indices[t] for t in titles]
+    sim_scores = functools.reduce(lambda a, b: a + b, [list(enumerate(cosine_sim[i])) for i in idx])
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:num_movies+1]  # first is the same movie
+    sim_scores = sim_scores[len(titles):num_movies+len(titles)]  # firsts ones is what we searched
     movie_indices = [i[0] for i in sim_scores]
     movie_similarity = [i[1] for i in sim_scores]
     return pd.DataFrame(zip(movie['id'].iloc[movie_indices], movie['title'].iloc[movie_indices], movie_similarity),
                         columns=["movieId", "title", "score"])
 
 
-def contend_based_recommendations(movie, title):
+def contend_based_recommendations(movie, titles):
     """read matrix create similarity function and call main function"""
     tfidf_matrix = scipy.sparse.load_npz('data/tfidf_matrix.npz')
     cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-    return get_recommendations(movie, title, cosine_sim)
+    return get_recommendations(movie, titles, cosine_sim)
 
 
-def contend_based_recommendations_extra(movie, title):
+def contend_based_recommendations_extra(movie, titles):
     """read matrix create similarity function and call main function"""
     count_matrix = scipy.sparse.load_npz("data/count_matrix.npz")
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
-    return get_recommendations(movie, title, cosine_sim)
+    return get_recommendations(movie, titles, cosine_sim)
 
