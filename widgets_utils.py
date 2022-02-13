@@ -1,13 +1,15 @@
 import streamlit as st
 from script.recommender import fetch_poster, movie_link
+import constants as const
 
 
-def create_recommender_system(cfg, movie_num=5):
+def create_recommender_system(cfg):
     """here we create empty blanks for all recommended movies
     and add description and title from appropriate config file"""
     with st.expander(cfg["title"]):
         st.markdown(cfg["description"])
-    movie_cols = st.columns(movie_num)
+    print(const.MOVIE_NUMBER)
+    movie_cols = st.columns(const.MOVIE_NUMBER)
     for c in movie_cols:
         with c:
             st.empty()

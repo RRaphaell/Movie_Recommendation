@@ -1,9 +1,8 @@
-import pandas as pd
 import pickle
 import streamlit as st
 from script.recommender import contend_based_recommendations, best_score_based_recommendations, contend_based_recommendations_extra
 from config import score_based_cfg, content_based_cfg, content_extra_based_cfg
-from utils import create_recommender_system, show_recommended_movie_info
+from widgets_utils import create_recommender_system, show_recommended_movie_info
 
 st.set_page_config(page_title="Recommender system")
 

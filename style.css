@@ -36,7 +36,8 @@
     margin-left: 30px;
 }
 
-div.css-j5r0tf.e1tzin5v2 {
+
+div.e1tzin5v2:not(.css-ulq27u):not(.css-ht50i) {
     background-color: #030000c4;
     border-radius: 5px;
     border: 1px solid #6c0101;

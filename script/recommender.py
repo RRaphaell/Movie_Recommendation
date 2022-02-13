@@ -4,6 +4,7 @@ import requests
 import functools
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
+import constants as const
 
 
 def movie_link(movie_id):
@@ -21,18 +22,18 @@ def fetch_poster(movie_id):
     return full_path
 
 
-def best_score_based_recommendations(num_movies=5):
+def best_score_based_recommendations():
     """we have already saved dataframe which is sorted based on scores.
     and just read and get top movies"""
     with open('data/movie_scores.pickle', 'rb') as handle:
         movies = pickle.load(handle)
-    movies = movies.head(num_movies)
+    movies = movies.head(const.MOVIE_NUMBER)
     movies = movies[["id", "title", "score"]]
     movies.columns = ["movieId", "title", "score"]
     return movies
 
 
-def get_recommendations(movie, titles, cosine_sim, num_movies=10):
+def get_recommendations(movie, titles, cosine_sim):
     """in this function we find similarity score for specific movie sorted
     and gets all metadata for it"""
 
@@ -40,7 +41,7 @@ def get_recommendations(movie, titles, cosine_sim, num_movies=10):
     idx = [indices[t] for t in titles]
     sim_scores = functools.reduce(lambda a, b: a + b, [list(enumerate(cosine_sim[i])) for i in idx])
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[len(titles):num_movies+len(titles)]  # firsts ones is what we searched
+    sim_scores = sim_scores[len(titles):const.MOVIE_NUMBER + len(titles)]  # firsts ones is what we searched
     movie_indices = [i[0] for i in sim_scores]
     movie_similarity = [i[1] for i in sim_scores]
     return pd.DataFrame(zip(movie['id'].iloc[movie_indices], movie['title'].iloc[movie_indices], movie_similarity),
