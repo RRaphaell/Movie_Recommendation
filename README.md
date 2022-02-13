@@ -7,6 +7,7 @@ Feel free to fork the repository and make it for any other product recommendatio
 ### **Demo**
 https://share.streamlit.io/rraphaell/movie_recommendation/main/movie_recommender.py
 
+![visualization](assets/movie_recommendation.gif)
 
 ## **Resources**
 ### Blogs
@@ -35,3 +36,4 @@ https://share.streamlit.io/rraphaell/movie_recommendation/main/movie_recommender
 2. https://github.com/pr-atha-m/Movie_recommendation_system
 3. https://github.com/Explore-AI/unsupervised-predict-streamlit-template
 4. https://github.com/Chandru-21/End-to-End-Movie-Recommendation-System-with-deployment-using-docker-and-kubernetes
+
