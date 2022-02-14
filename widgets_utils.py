@@ -8,7 +8,7 @@ def create_recommender_system(cfg):
     and add description and title from appropriate config file"""
     with st.expander(cfg["title"]):
         st.markdown(cfg["description"])
-    print(const.MOVIE_NUMBER)
+
     movie_cols = st.columns(const.MOVIE_NUMBER)
     for c in movie_cols:
         with c:
@@ -17,7 +17,7 @@ def create_recommender_system(cfg):
     return movie_cols
 
 
-def show_recommended_movie_info(recommended_movies, movie_cols):
+def show_recommended_movie_info(recommended_movies, movie_cols, show_score):
     """in this function we get all data what we want to show and put in on webpage"""
     movie_ids = recommended_movies["movieId"]
     movie_titles = recommended_movies["title"]
@@ -28,4 +28,5 @@ def show_recommended_movie_info(recommended_movies, movie_cols):
         with c:
             st.markdown(f"<a style='display: block; text-align: center;' href='{l}'>{t}</a>", unsafe_allow_html=True)
             st.image(p)
-            st.write(round(s, 3))
+            if show_score:
+                st.write(round(s, 3))

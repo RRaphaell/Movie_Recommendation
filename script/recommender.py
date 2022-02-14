@@ -1,7 +1,6 @@
 import scipy
 import pickle
 import requests
-import functools
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
 import constants as const
@@ -36,12 +35,19 @@ def best_score_based_recommendations():
 def get_recommendations(movie, titles, cosine_sim):
     """in this function we find similarity score for specific movie sorted
     and gets all metadata for it"""
-
     indices = pd.Series(movie.index, index=movie['title']).drop_duplicates()
-    idx = [indices[t] for t in titles]
-    sim_scores = functools.reduce(lambda a, b: a + b, [list(enumerate(cosine_sim[i])) for i in idx])
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[len(titles):const.MOVIE_NUMBER + len(titles)]  # firsts ones is what we searched
+    idx = {indices[t] for t in titles}
+    sim_scores = dict()
+    for movie_idx in idx:
+        sim = cosine_sim[movie_idx]
+        for i, s in enumerate(sim):
+            sim_scores[i] = s if s > sim_scores.get(i, 0) else sim_scores.get(i, 0)
+
+    for i in idx:
+        del sim_scores[i]
+
+    sim_scores = list(sorted(sim_scores.items(), key=lambda item: item[1], reverse=True))[:const.MOVIE_NUMBER]
+
     movie_indices = [i[0] for i in sim_scores]
     movie_similarity = [i[1] for i in sim_scores]
     return pd.DataFrame(zip(movie['id'].iloc[movie_indices], movie['title'].iloc[movie_indices], movie_similarity),
