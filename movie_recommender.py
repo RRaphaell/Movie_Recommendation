@@ -1,10 +1,11 @@
 import pickle
 import streamlit as st
-from script.recommender import contend_based_recommendations, best_score_based_recommendations, contend_based_recommendations_extra
+from script.recommender import contend_based_recommendations, weighted_average_based_recommendations, contend_based_recommendations_extra
 from config import score_based_cfg, content_based_cfg, content_extra_based_cfg
-from widgets_utils import create_recommender_system, show_recommended_movie_info
+from UI.widgets import initialize_movie_widget, show_recommended_movie_info
 import constants as const
 st.set_page_config(page_title="Recommender system", layout="wide")
+
 
 # add styling
 with open('style.css') as f:
@@ -20,19 +21,19 @@ options = main_layout.multiselect('Which movies do you like?', movie["title"].un
 show_recommended_movies_btn = search_layout.button("search")
 
 
-recommended_movie_num = st.sidebar.slider("Recommended movie number", min_value=5, max_value=10)
+recommended_movie_num = st.sidebar.slider("Recommended movie number", min_value=5, max_value=10, value=7)
 if recommended_movie_num:
     const.MOVIE_NUMBER = recommended_movie_num
 
 show_score = st.sidebar.checkbox("Show score")
 
 # create horizontal layouts for movies
-col_for_score_based = create_recommender_system(score_based_cfg)
-score_based_recommended_movies = best_score_based_recommendations()
+col_for_score_based = initialize_movie_widget(score_based_cfg)
+score_based_recommended_movies = weighted_average_based_recommendations()
 show_recommended_movie_info(score_based_recommended_movies, col_for_score_based, show_score)
 
-col_for_content_based = create_recommender_system(content_based_cfg)
-col_for_content_based_extra = create_recommender_system(content_extra_based_cfg)
+col_for_content_based = initialize_movie_widget(content_based_cfg)
+col_for_content_based_extra = initialize_movie_widget(content_extra_based_cfg)
 
 # when search clicked
 if show_recommended_movies_btn:

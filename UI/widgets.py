@@ -1,9 +1,9 @@
 import streamlit as st
-from script.recommender import fetch_poster, movie_link
 import constants as const
+from script.utils import movie_link, fetch_poster
 
 
-def create_recommender_system(cfg):
+def initialize_movie_widget(cfg):
     """here we create empty blanks for all recommended movies
     and add description and title from appropriate config file"""
     with st.expander(cfg["title"]):
@@ -30,3 +30,4 @@ def show_recommended_movie_info(recommended_movies, movie_cols, show_score):
             st.image(p)
             if show_score:
                 st.write(round(s, 3))
+                
