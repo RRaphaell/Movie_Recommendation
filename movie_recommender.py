@@ -1,5 +1,6 @@
 import pickle
 import streamlit as st
+import streamlit.components.v1 as components
 from script.recommender import contend_based_recommendations, weighted_average_based_recommendations, contend_based_recommendations_extra
 from config import score_based_cfg, content_based_cfg, content_extra_based_cfg
 from UI.widgets import initialize_movie_widget, show_recommended_movie_info
@@ -15,8 +16,11 @@ with open('style.css') as f:
 with open('data/movie_df.pickle', 'rb') as handle:
     movie = pickle.load(handle)
 
-# add search panel and search button
 st.markdown('# Movie Recommender system')
+social_components = open("assets/social_components.html", 'r', encoding='utf-8')
+components.html(social_components.read())
+
+# add search panel and search button
 main_layout, search_layout = st.columns([10, 1])
 options = main_layout.multiselect('Which movies do you like?', movie["title"].unique())
 show_recommended_movies_btn = search_layout.button("search")
