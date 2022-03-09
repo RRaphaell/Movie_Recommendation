@@ -1,4 +1,4 @@
-name: clean_env_movie_rec
+name: movie_recommendation_env
 channels:
   - defaults
 dependencies:
@@ -74,4 +74,4 @@ dependencies:
     - watchdog==2.1.6
     - widgetsnbextension==3.5.2
     - wordcloud==1.8.1
-prefix: /home/raphael/anaconda3/envs/clean_env_movie_rec
+prefix: /home/raphael/anaconda3/envs/movie_recommendation_env

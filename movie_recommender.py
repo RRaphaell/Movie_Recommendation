@@ -11,29 +11,30 @@ st.set_page_config(page_title="Recommender system", layout="wide")
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+# load main movie dataframe
 with open('data/movie_df.pickle', 'rb') as handle:
     movie = pickle.load(handle)
 
-# add search panel and button widget
+# add search panel and search button
 st.markdown('# Movie Recommender system')
 main_layout, search_layout = st.columns([10, 1])
 options = main_layout.multiselect('Which movies do you like?', movie["title"].unique())
 show_recommended_movies_btn = search_layout.button("search")
 
-
-recommended_movie_num = st.sidebar.slider("Recommended movie number", min_value=5, max_value=10, value=7)
+# add widgets on sidebar
+recommended_movie_num = st.sidebar.slider("Recommended movie number", min_value=5, max_value=10)
 if recommended_movie_num:
     const.MOVIE_NUMBER = recommended_movie_num
-
 show_score = st.sidebar.checkbox("Show score")
 
 # create horizontal layouts for movies
 col_for_score_based = initialize_movie_widget(score_based_cfg)
-score_based_recommended_movies = weighted_average_based_recommendations()
-show_recommended_movie_info(score_based_recommended_movies, col_for_score_based, show_score)
-
 col_for_content_based = initialize_movie_widget(content_based_cfg)
 col_for_content_based_extra = initialize_movie_widget(content_extra_based_cfg)
+
+# show recommended movies based on weighted average (this is same for all movies)
+score_based_recommended_movies = weighted_average_based_recommendations()
+show_recommended_movie_info(score_based_recommended_movies, col_for_score_based, show_score)
 
 # when search clicked
 if show_recommended_movies_btn:

@@ -9,6 +9,23 @@ https://share.streamlit.io/rraphaell/movie_recommendation/main/movie_recommender
 
 ![visualization](assets/movie_recommendation.gif)
 
+## Running locally
+### use conda env(recommended)
+- using environment.yml
+```
+conda env create -f environment.yml
+conda activate movie_recommendation_env
+streamlit run movie_recommender.py
+```
+
+- using requirements.txt
+```
+conda create --name env_name python==3.8
+conda activate env_name
+conda install --file requirements.txt
+streamlit run movie_recommender.py
+```
+
 ## **Resources**
 ### Blogs
 1. https://towardsdatascience.com/introduction-to-recommender-systems-6c66cf15ada

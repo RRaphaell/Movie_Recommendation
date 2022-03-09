@@ -14,6 +14,11 @@
     color: white;
 }
 
+.stMarkdown {
+    text-align: left;
+}
+
+
 .streamlit-expanderContent {
     color: white;
     background-color: #111111b8;
@@ -23,19 +28,25 @@
     color: white;
 }
 
+
 .css-m96wse.edgvbvh1 {
     padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-radius: 12px;
     border: 14px;
-    margin-top: 32px;
+    margin-top: 30px;
+    background-color: #262731;
+    color: red;
+    font-size: 20px;
 }
 
 .css-f341up.e16nr0p31 {
     background-color: #0000009e;
     padding: 19px;
     margin-left: 30px;
+    border-radius: 10px;
 }
-
 
 div.e1tzin5v2:not(.css-ulq27u):not(.css-ht50i) {
     background-color: #030000c4;
@@ -89,7 +100,6 @@ div.css-f341up.e16nr0p31 {
 }
 
 .css-1wrcr25.eknhn3m0 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1)), url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700677187.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700677187.jpg");
     background-size: cover;
-    opacity: 0.85;
 }
