@@ -28,8 +28,7 @@
     color: white;
 }
 
-
-.css-m96wse.edgvbvh1 {
+.row-widget.stButton >* {
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -56,10 +55,10 @@ div.e1tzin5v2:not(.css-ulq27u):not(.css-ht50i) {
     font-weight: bold;
     color: white;
     font-size: 12px;
-    margin: 5px;
+    /*margin: 5px;*/
     padding: 10px;
     font-family: serif;
-    min-height: 100px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -91,13 +90,21 @@ div.e1tzin5v2:not(.css-ulq27u):not(.css-ht50i) {
     border-color: white;
 }
 
-div.css-f341up.e16nr0p31 {
+#movie-recommender-system {
     font-family: monospace;
     text-align: center;
     font-weight: bold;
     color: #e10202;
     font-size: 30px;
 }
+
+/*div.css-f341up.e16nr0p31 {*/
+/*    font-family: monospace;*/
+/*    text-align: center;*/
+/*    font-weight: bold;*/
+/*    color: #e10202;*/
+/*    font-size: 30px;*/
+/*}*/
 
 .css-1wrcr25.eknhn3m0 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url("https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700677187.jpg");
