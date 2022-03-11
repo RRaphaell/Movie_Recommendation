@@ -5,7 +5,7 @@ We're working on getting the majority of those systems here and it will be a goo
 Feel free to fork the repository and make it for any other product recommendation needs 
 
 ### **Demo**
-https://share.streamlit.io/rraphaell/movie_recommendation/main/movie_recommender.py
+here is the [web app](https://share.streamlit.io/rraphaell/movie_recommendation/main/movie_recommender.py)
 
 ![visualization](assets/movie_recommendation.gif)
 
