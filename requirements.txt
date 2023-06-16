@@ -8,4 +8,4 @@ pandas_profiling==3.1.0
 wordcloud==1.8.1
 pywaffle==0.6.4
 squarify==0.4.3
-pickle==4.0
+pickle
