@@ -15,7 +15,7 @@ markdown-it-py==2.2.0
 mdurl==0.1.2
 more-itertools==9.1.0
 numpy==1.24.3
-pandas==2.0.2
+pandas==1.4.0
 pickle5==0.0.11
 pkginfo==1.9.6
 pycparser==2.21
